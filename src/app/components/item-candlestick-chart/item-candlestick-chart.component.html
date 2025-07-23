@@ -1,0 +1,49 @@
+<div class="market-container">
+  <div class="market-header">
+    <div>
+      <span class="item-name">{{ marketData?.itemName }}</span>
+      <span class="current-price">{{ marketData?.currentPrice | number:'1.0-0' }} gold</span>
+      <span class="price-change" [ngClass]="{'price-up': marketData?.trend === 'up', 'price-down': marketData?.trend === 'down'}">
+        {{ marketData?.priceChange >= 0 ? '+' : '' }}{{ marketData?.priceChange | number:'1.1-1' }}%
+      </span>
+    </div>
+    <div class="time-period">
+      {{ marketData?.timePeriod }}
+    </div>
+  </div>
+
+  <div class="chart-container" #chartContainer>
+    <div class="chart-grid"></div>
+
+    <!-- Y-axis labels -->
+    <div class="y-axis">
+      <div class="y-label" *ngFor="let label of chartConfig.yAxisLabels">{{ label }}</div>
+    </div>
+
+    <!-- X-axis labels -->
+    <div class="x-axis">
+      <div class="x-label" *ngFor="let label of chartConfig.xAxisLabels">{{ label }}</div>
+    </div>
+
+    <div class="tooltip" #tooltip></div>
+  </div>
+
+  <div class="market-stats">
+    <div class="stat-card">
+      <div class="stat-title">24h Volume</div>
+      <div class="stat-value">{{ marketData?.totalVolume | number:'1.0-0' }} items</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">24h High</div>
+      <div class="stat-value high-value">{{ marketData?.periodHigh | number:'1.0-0' }} gold</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">24h Low</div>
+      <div class="stat-value low-value">{{ marketData?.periodLow | number:'1.0-0' }} gold</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">Active Listings</div>
+      <div class="stat-value listing-value">{{ marketData?.activeListings | number:'1.0-0' }}</div>
+    </div>
+  </div>
+</div>
